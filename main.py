@@ -8,15 +8,16 @@ def run_study_guide():
     run = True
 
     while run:
-        prompt = input('Would you like to add content? [y/n]\n')
+        prompt = input('Would you like to add a new study set? [y/n]\n')
         if prompt == 'y':
-            # Adding sections
-            study_guide.add_section("Math")
-            study_guide.add_section("Science")
+            # Adding section
+            section = input('What is the section name?\n')
+            study_guide.add_section(section)
+            section_id = 1
             # Adding flashcards
-            study_guide.add_flashcard(1, "What is the Pythagorean theorem?", "a^2 + b^2 = c^2")
-            study_guide.add_flashcard(1, "What is the quadratic formula?", "x = (-b ± √(b^2 - 4ac)) / 2a")
-            study_guide.add_flashcard(2, "What is DNA?", "Deoxyribonucleic acid")
+            while prompt == 'y':
+                prompt = input('Would you like to add a flash card? [y/n]\n')
+                if prompt == 'y': study_guide.add_flashcard(section_id, input('Question: '), input('Answer: '))
         elif prompt == 'n':
             prompt = input('Would you like to review content? [y/n]\n')
             if prompt == 'y':
@@ -28,7 +29,7 @@ def run_study_guide():
             run = False
         elif prompt == 'force delete':
             clear_database.clear_database(db_file)
-            # run = False  # Exit the program after clearing the database
+            run = False  # Exit the program after clearing the database
         else:
             print('Retry, entered value did not work.')
 
